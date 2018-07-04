@@ -1,0 +1,1 @@
+# HiveOS Custom Miner integration
