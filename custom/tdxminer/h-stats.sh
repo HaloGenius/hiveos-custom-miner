@@ -9,7 +9,7 @@ get_cards_hashes(){
 	# hs is global
 	hs=''
 	for (( i=0; i < ${GPU_COUNT_AMD}; i++ )); do
-		local MHS=`cat $LOG_NAME | grep "Stats GPU ${i}" | tail -n 1 | awk '{ printf $8"\n" }' | sed -e 's/M.*//'`
+		local MHS=`cat $LOG_NAME | grep "$(echo $i | awk '{printf("Stats GPU%2d",$1)}')" | tail -n 1 | sed 's/^.*\(lyra2z*\)/\1/g' | awk '{ printf $2"\n" }' | sed -e 's/M.*//'`
 		hs[$i]=`echo $MHS | awk '{ printf("%.f",$1*1000) }'`
 	done
 }
