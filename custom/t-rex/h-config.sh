@@ -4,18 +4,6 @@
 #. debug.conf
 #. /hive-config/wallet.conf
 
-algo_avail=("lyra2z" "tribus" "phi" "phi2" "c11" "x17")
-algo=""
-for i in "${algo_avail[@]}"
-do
-	if [[ ! -z $(echo $CUSTOM_USER_CONFIG | grep $i) ]]; then
-		algo=$i
-		break
-	fi
-done
-echo $algo
-
-
 [[ -z $CUSTOM_TEMPLATE ]] && echo -e "${YELLOW}CUSTOM_TEMPLATE is empty${NOCOLOR}" && return 1
 [[ -z $CUSTOM_URL ]] && echo -e "${YELLOW}CUSTOM_URL is empty${NOCOLOR}" && return 1
 

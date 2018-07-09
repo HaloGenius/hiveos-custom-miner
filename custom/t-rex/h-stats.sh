@@ -58,7 +58,21 @@ get_miner_shares_rj(){
 
 get_total_hashes(){
 	# khs is global
-	local Total=`cat $LOG_NAME | tail -n 100 | sed -e "s/\x1b\[.\{1,5\}m//g" | grep '20[0-9]* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] [[] [A-Z]* []]' | awk '{printf("%.f\n", $8) }' | tail -n 1`
+	local tmp=`cat $LOG_NAME | tail -n 100 | sed -e "s/\x1b\[.\{1,5\}m//g" | grep '20[0-9]* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] [[] [A-Z]* []]' | tail -n 1`
+	local units=`echo $tmp | awk '{ print $9 }'`
+	local Total=0
+	case $units in
+		kH/s)
+			Total=`echo $tmp | awk '{ printf("%.f\n", $8) }'`
+		;;
+		MH/s)
+			Total=`echo $tmp | awk '{ printf("%.f\n", $8*1000) }'`
+		;;
+		*)
+			Total=0
+		;;
+		
+	esac
 	echo $Total
 }
 
