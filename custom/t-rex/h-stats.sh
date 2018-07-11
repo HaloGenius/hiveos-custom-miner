@@ -11,7 +11,7 @@ get_cards_hashes(){
 	# hs is global
 	hs=''
 	for (( i=0; i < ${GPU_COUNT_NVIDIA}; i++ )); do
-		local MHS=`cat $LOG_NAME | tail -n 100 | sed -e "s/\x1b\[.\{1,5\}m//g" | grep "$(echo $i | awk '{printf("GPU #%d^",$1)}')" | tail -n 1 | awk '{printf("%.f\n",$5)}'`
+		local MHS=`cat $LOG_NAME | tail -n 100 | sed -e "s/\x1b\[.\{1,5\}m//g" | grep "$(echo $i | awk '{printf("GPU #%d:",$1)}')" | tail -n 1 | awk '{printf("%.f\n",$5)}'`
 		hs[$i]=`echo $MHS | awk '{ printf("%.f",$1) }'`
 	done
 }
