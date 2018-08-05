@@ -4,7 +4,7 @@ cd `dirname $0`
 
 [ -t 1 ] && . colors
 
-#CUSTOM_MINER="tdxminer"
+#CUSTOM_MINER="t-rex"
 #. /hive-config/wallet.conf
 #[[ -z $CUSTOM_MINER ]] && echo -e "${RED}No CUSTOM_MINER is set${NOCOLOR}" && exit 1
 #. /hive/custom/$CUSTOM_MINER/h-manifest.conf
@@ -20,9 +20,5 @@ cd `dirname $0`
 [[ ! -f $CUSTOM_CONFIG_FILENAME ]] && echo -e "${RED}Custom config ${YELLOW}$CUSTOM_CONFIG_FILENAME${RED} is not found${NOCOLOR}" && exit 1
 CUSTOM_LOG_BASEDIR=`dirname "$CUSTOM_LOG_BASENAME"`
 [[ ! -d $CUSTOM_LOG_BASEDIR ]] && mkdir -p $CUSTOM_LOG_BASEDIR
-[[ -d $CUSTOM_LOG_BASEDIR ]] && [[ ! -f $CUSTOM_LOG_BASEDIR/$CUSTOM_NAME ]] && cp -f /hive/custom/$CUSTOM_NAME/t-rex $CUSTOM_LOG_BASEDIR/$CUSTOM_NAME
 
-cd $CUSTOM_LOG_BASEDIR
-./t-rex $(< /hive/custom/$CUSTOM_NAME/$CUSTOM_NAME.conf) $@
-#./t-rex $(< /hive/custom/$CUSTOM_NAME/$CUSTOM_NAME.conf) $@ 2>&1 | tee $CUSTOM_LOG_BASENAME.log
-
+./t-rex $(< /hive/custom/$CUSTOM_NAME/$CUSTOM_NAME.conf) $@ # 2>&1 | tee -a $CUSTOM_LOG_BASENAME.log

@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 # This code is included in /hive/bin/custom function
 
+. colors
 #. debug.conf
-#. /hive-config/wallet.conf
+#. h-manifest.conf
+
+#API_PORT=4058
 
 [[ -z $CUSTOM_TEMPLATE ]] && echo -e "${YELLOW}CUSTOM_TEMPLATE is empty${NOCOLOR}" && return 1
 [[ -z $CUSTOM_URL ]] && echo -e "${YELLOW}CUSTOM_URL is empty${NOCOLOR}" && return 1
+[[ -z $CUSTOM_PASS ]] && CUSTOM_PASS="x"
 
-conf="-o ${CUSTOM_URL} -u ${CUSTOM_TEMPLATE} -p ${CUSTOM_PASS} ${CUSTOM_USER_CONFIG}"
+conf="-o ${CUSTOM_URL} -u ${CUSTOM_TEMPLATE} -p ${CUSTOM_PASS} -J -l $CUSTOM_LOG_BASENAME.log --api-bind-telnet 127.0.0.1:${API_PORT} ${CUSTOM_USER_CONFIG}"
 
 #replace tpl values in whole file
 [[ -z $EWAL && -z $ZWAL && -z $DWAL ]] && echo -e "${RED}No WAL address is set${NOCOLOR}"
@@ -19,4 +23,5 @@ conf="-o ${CUSTOM_URL} -u ${CUSTOM_TEMPLATE} -p ${CUSTOM_PASS} ${CUSTOM_USER_CON
 
 [[ -z $CUSTOM_CONFIG_FILENAME ]] && echo -e "${RED}No CUSTOM_CONFIG_FILENAME is set${NOCOLOR}" && return 1
 echo "$conf" > $CUSTOM_CONFIG_FILENAME
+
 
