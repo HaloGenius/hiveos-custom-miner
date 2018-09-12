@@ -2,7 +2,7 @@
 
 #API_PORT=4058
 #API_TIMEOUT=5
-algo_avail=("lyra2z" "tribus" "phi" "phi2" "c11" "x17" "x16r" "x16s" "renesis")
+algo_avail=("balloon" "bitcore" "c11" "hsr" "lyra2z" "phi" "polytimos" "renesis" "skunk" "sonoa" "tribus" "x16r" "x16s" "x17")
 
 #######################
 # Functions
