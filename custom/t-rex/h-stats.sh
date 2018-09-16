@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
+cd `dirname $0`
+#. h-manifest.conf
+#. debug.conf
+#. /hive-config/wallet.conf
+. /hive/custom/$CUSTOM_MINER/h-manifest.conf
+
 #API_PORT=4058
 #API_TIMEOUT=5
-algo_avail=("balloon" "bitcore" "c11" "hsr" "lyra2z" "phi" "polytimos" "renesis" "skunk" "sonoa" "tribus" "x16r" "x16s" "x17")
+algo_avail=("balloon" "bcd" "bitcore" "c11" "hmq1725" "hsr" "lyra2z" "phi" "polytimos" "renesis" "skunk" "sonoa" "tribus" "x16r" "x16s" "x17")
 
 #######################
 # Functions
@@ -26,11 +32,11 @@ get_cards_hashes(){
 }
 
 get_nvidia_cards_temp(){
-	echo $(jq -c "[.temp$nvidia_indexes_array]" <<< $gpu_stats)
+	echo $(jq -c "[.gpus[].temperature]" <<< $miner_stat)
 }
 
 get_nvidia_cards_fan(){
-	echo $(jq -c "[.fan$nvidia_indexes_array]" <<< $gpu_stats)
+	echo $(jq -c "[.gpus[].fan_speed]" <<< $miner_stat)
 }
 
 get_miner_uptime(){
@@ -40,16 +46,17 @@ get_miner_uptime(){
 }
 
 get_miner_algo(){
-	local algo=""
-	
-	for i in "${algo_avail[@]}"
-	do
-		if [[ ! -z $(echo $CUSTOM_USER_CONFIG | grep $i) ]]; then
-			algo=$i
-			break
-		fi
-	done
-	echo $algo
+#	local algo="x16r"
+#	
+#	for i in "${algo_avail[@]}"
+#	do
+#		if [[ ! -z $(echo $CUSTOM_USER_CONFIG | grep $i) ]]; then
+#			algo=$i
+#			break
+#		fi
+#	done
+#	echo $algo
+	echo $(jq -c '.algorithm' <<< "$miner_stat")
 }
 
 get_miner_shares_ac(){
@@ -73,10 +80,12 @@ get_total_hashes(){
 #######################
 # MAIN script body
 #######################
-#. /hive-config/wallet.conf
-. /hive/custom/$CUSTOM_MINER/h-manifest.conf
+
+
 miner_stat=`echo 'summary' | nc -w $API_TIMEOUT localhost $API_PORT`
-##echo $miner_stat
+
+#echo $miner_stat
+
 if [[ $? -ne 0 ]]; then
 	echo -e "${YELLOW}Failed to read miner stats from localhost:${API_PORT}${NOCOLOR}"
 	stats=""
