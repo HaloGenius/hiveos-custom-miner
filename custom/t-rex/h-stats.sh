@@ -56,7 +56,7 @@ get_miner_algo(){
 #		fi
 #	done
 #	echo $algo
-	echo $(jq -c '.algorithm' <<< "$miner_stat")
+	echo $(jq -r -c '.algorithm' <<< "$miner_stat")
 }
 
 get_miner_shares_ac(){
