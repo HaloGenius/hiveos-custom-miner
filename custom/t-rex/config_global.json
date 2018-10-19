@@ -18,7 +18,7 @@
   "algo": "x16r",
   "hashrate-avr": 30,
 
-  "log-path": "/var/log/t-rex/t-rex.log",
+  "log-path": "/var/log/miner/t-rex/t-rex.log",
 
   "exit-on-cuda-error": true,
   "exit-on-connection-lost": false

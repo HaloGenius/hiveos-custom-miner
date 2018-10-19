@@ -100,8 +100,8 @@ fi
 
 	get_cards_hashes					# hashes array
 	hs_units='khs'						# hashes utits
-	temp=$(get_nvidia_cards_temp)		# cards temp
-	fan=$(get_nvidia_cards_fan)			# cards fan
+	local temp=$(get_nvidia_cards_temp)		# cards temp
+	local fan=$(get_nvidia_cards_fan)			# cards fan
 	uptime=$(get_miner_uptime)			# miner uptime
 	algo=$(get_miner_algo)				# algo
 	# A/R shares by pool

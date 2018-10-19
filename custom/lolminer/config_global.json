@@ -1,0 +1,20 @@
+{
+	"DEFAULTS" : {
+		"DEVICES" : "AMD",
+		"APIPORT" : 44444,
+		"TIMEPRINT": 1,
+		"SHORTSTATS":10,
+		"LONGSTATS": 60
+	},
+
+	"HIVEOS" :
+	{
+		"COIN" : "BTG",
+		"POOLS" : [
+			{"POOL" : "btg.2miners.com",
+			 "PORT" : "4040",
+			 "USER" : "GZxpcmN85n2TSA7j24nRqFWo6qnA7x94ZQ.lolMiner",
+			 "PASS" : "x"}
+		]
+	}
+}
