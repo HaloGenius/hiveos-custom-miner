@@ -3,6 +3,7 @@
 Used manual at https://github.com/minershive/hiveos-linux/tree/master/hive/custom/
 
 ### Currently integrated as custom miners:
+* [lolMiner v0.5](https://github.com/HaloGenius/hiveos-custom-miner/releases/tag/lolMiner-0.5)
 * [t-rex v0.7.0](https://github.com/HaloGenius/hiveos-custom-miner/releases/tag/t-rex-v0.7.0)
 * [tdxminer v0.2.2.2](https://github.com/HaloGenius/hiveos-custom-miner/releases/tag/tdxminer-v0.2.2.2)
 
