@@ -21,7 +21,7 @@ get_amd_cards_fan(){
 stats_raw=`curl --connect-timeout 2 --max-time 5 --silent --noproxy '*' http://127.0.0.1:${API_PORT}/summary`
 #echo $stats_raw | jq 
 #exit 1
-echo $amd_indexes_array | jq
+#echo $amd_indexes_array | jq
 
 if [[ $? -ne 0 || -z $stats_raw ]]; then
 	echo -e "${YELLOW}Failed to read $miner from localhost:${API_PORT}${NOCOLOR}"
