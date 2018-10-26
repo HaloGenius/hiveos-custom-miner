@@ -13,98 +13,64 @@ making sure it is stable, slowly increase your overclock to find the
 
 Usage of command line options
 Options:
-  -a, --algo                 Specify the hash algorithm to use.
-                             balloon
-                             bcd
-                             bitcore
-                             c11
-                             hmq1725
-                             hsr
-                             lyra2z
-                             phi
-                             polytimos
-                             renesis
-                             skunk
-                             sonoa
-                             tribus
-                             x16r
-                             x16s
-                             x17
-  -d, --devices              Comma separated list of CUDA devices to use.
-                             Device IDs start counting from 0.
-  -i, --intensity            GPU intensity 8-25 (default: auto).
-  -o, --url                  URL of mining server.
-  -u, --user                 Username for mining server.
-  -p, --pass                 Password for mining server.
-  -r, --retries              Number of times to retry if a network call fails.
-  -R, --retry-pause          Pause in seconds between retries.
-  -T, --timeout              Network timeout, in seconds (default: 180)
-      --time-limit           Miner shutdown interval in seconds. (default: 0)
-      --temperature-limit    GPU shutdown temperature. (default: 0)
+    -a, --algo                     Specify the hash algorithm to use.
+                                    balloon
+                                    bcd
+                                    bitcore
+                                    c11
+                                    hmq1725
+                                    hsr
+                                    lyra2z
+                                    phi
+                                    polytimos
+                                    renesis
+                                    sha256t
+                                    skunk
+                                    sonoa
+                                    timetravel
+                                    tribus
+                                    x16r
+                                    x16s
+                                    x17
+    -d, --devices                  Comma separated list of CUDA devices to use.
+                                    Device IDs start counting from 0.
+    -i, --intensity                GPU intensity 8-25 (default: auto).
+    -o, --url                      URL of mining server.
+    -u, --user                     Username for mining server.
+    -p, --pass                     Password for mining server.
+    -r, --retries                  Number of times to retry if a network call fails.
+    -R, --retry-pause              Pause in seconds between retries.
+    -T, --timeout                  Network timeout, in seconds (default: 180)
+        --time-limit               Miner shutdown interval in seconds. (default: 0 - disabled)
+        --temperature-limit        GPU shutdown temperature. (default: 0 - disabled)
+        --temperature-start        GPU temperature to enable card after disable. (default: 0 - disabled)
 
-  -b, --api-bind-telnet      IP:port for the miner API via telnet (default: 0.0.0.0:4068). Set to 0 to disable.
-      --api-bind-http        IP:port for the miner API via HTTP (default: 0.0.0.0:4067). Set to 0 to disable.
-  -J  --json-response        Telnet API server will make json responses.
+    -b, --api-bind-telnet          IP:port for the miner API via telnet (default: 0.0.0.0:4068). Set to 0 to disable.
+        --api-bind-http            IP:port for the miner API via HTTP (default: 0.0.0.0:4067). Set to 0 to disable.
+    -J  --json-response            Telnet API server will make json responses.
 
-  -N, --hashrate-avr         Sliding window length in seconds used to compute average hashrate (default: 30).
-      --gpu-report-interval  GPU stats report frequency. (default: 5. every 5th share)
-  -q, --quiet                Quiet mode. No GPU stats at all.
-      --no-color             Disable color output for console.
-  -B, --benchmark            Benchmark mode.
-  -P, --protocol-dump        User protocol logging.
-  -c, --config               Load a JSON-format configuration file.
-  -l, --log-path             Full path of the log file.
-      --version              Display version information and exit.
-  -h, --help                 Display this help text and exit.
+    -N, --hashrate-avr             Sliding window length in seconds used to compute average hashrate (default: 30).
+        --gpu-report-interval      GPU stats report frequency. (default: 5. every 5th share)
+    -q, --quiet                    Quiet mode. No GPU stats at all.
+        --no-color                 Disable color output for console.
+    -B, --benchmark                Benchmark mode.
+    -P, --protocol-dump            User protocol logging.
+    -c, --config                   Load a JSON-format configuration file.
+    -l, --log-path                 Full path of the log file.
+        --cpu-priority             Set process priority (default: 2) 0 idle, 2 normal to 5 highest.
 
+        --exit-on-cuda-error       Forces miner to immediately exit on CUDA error.
+        --exit-on-connection-lost  Forces miner to immediately exit on connection lost.
+        --reconnect-on-fail-shares Forces miner to immediately reconnect to pool on N successively failed shares (default: 10).
+
+        --version                  Display version information and exit.
+    -h, --help                     Display this help text and exit.
 
 =========================================== JSON CONFIG USAGE ==========================================
 
 To start T-Rex with config file "config.txt" type in console: t-rex -c config.txt
 
-Config example with comments:
-{
-  "pools": [                                     ----- List of all your failover pools.
-    {
-      "user": "wallet_number_one",
-      "url": "stratum+tcp://my_pool.com:4553",
-      "pass": "d=0.2"
-    },
-    {
-      "user": "wallet_number_one",
-      "url": "stratum+tcp://my_pool2.com:4553",
-      "pass": "d=0.2"
-    }
-  ],
-
-  "api-bind-telnet": "0.0.0.0:4068",   ----- Telnet API bind option. Set "api-bind-telnet": "0" if you don't want to use it.
-  "api-bind-http": "0.0.0.0:4067",     ----- HTTP API bind option. Set "api-bind-http": "0" if you don't want to use it.
-  "json-response": false,              ----- If set to true enables json response for Telnet API.
-
-  "retries": 3,               ----- Connection retries count. After this number of attempts failover pool will be switched.
-  "retry-pause": 10,          ----- Pause in sec betweeb retries.
-  "timeout": 180,             ----- This is the max time in sec your pool connection may has no ping. After that reconnect will happen.
-
-  "algo": "lyra2z",           ----- This the name of mining algorithm. You can see available names at the top of this help file.
-  
-  "devices": 0                ----- This is GPU index in the system. You can select multiple GPUs sequentially: "devices": "0,2,3"
-  "intensity": 20,            ----- This is an intensity used with your GPU. It can be set for multiple GPUs sequentially: "intensity": "20,21.4,23"
-  
-  "hashrate-avr": 30,         ----- Sliding window length in sec used to compute average hashrate.
-
-  "log-path": "/home/x/t-rex.log",    ----- Path to log. If only file name set log will be saved into directory with the miner.
-
-  "exit-on-cuda-error": true,         ----- Shutdown miner immediately if has any CUDA error.
-  "exit-on-connection-lost": false,   ----- Shutdown miner immediately if pool connection lost.
-  
-  "protocol-dump": false,             ----- User protocol logging.
-  "gpu-report-interval": 5,           ----- Configurable GPUs report frequency. By default every 5 shares.
-  
-  "no-color": false,                  ----- Disable color output for console
-  "quiet": false,                     ----- Quiet mode. No GPU stats at all.
-  "time-limit": 0,                    ----- Shutdown miner after timeout in sec. By default disabled. (set to 0)
-  "temperature-limit": 0              ----- Disables device till miner shutdown in case of overheat. Limit in Celsius. (set to 0)
-}
+Use "config_example" file as a starting point to create your own config.
   
 ============================================ HTTP API USAGE ============================================
 
@@ -115,8 +81,55 @@ Common example of request structure: http://your_ip:your_port/handler_name
 
 ==[ TREX ]==
 
-Handler "trex" is intended to show miner control monitoring page in your web browser.
+Handler "trex" is intended to show miner control monitoring page in your web browser. You can see miner stats realtime and also change miner parameters and config on the fly. Also here you will see updates in case it appears.
 To activate the handler navigate to http://127.0.0.1:4067/trex using a web browser.
+
+==[ CONFIG ]==
+
+Handler "config" is intended to change your config on HDD and also change some miner parameters on the fly.
+You can change multiple parameters with one request. GET and POST requests supported.
+If you use config (started miner like this: t-rex.exe -c config_file) then any action with handler "config" will be saved into selected config_file.
+You can use this handler for automatization purposes like changing config at runtime, shutting down the miner via API and then restarting it with new parameters applied.
+
+GET usage examples:
+1) http://127.0.0.1:4067/config?protocol-dump=true   
+Will enable protocol dump on the fly and write it into config_file.
+
+2) http://127.0.0.1:4067/config?algo=x16r&devices=0,1&intensity=20,21  
+If you use config it will write the following config settings into it:
+algo=x16r
+devices=0,1
+intensity=20,21 
+
+3) http://127.0.0.1:4067/config?algo=x16r&devices=0,1&intensity=20,21&config=test.conf
+Will save settings into the file "test.conf" which will be created in the folder where the miner resides.
+algo=x16r
+devices=0,1
+intensity=20,21 
+
+4) http://127.0.0.1:4067/config?config=test.conf
+Will save your current miner settings into "test.conf" file.
+
+5) http://127.0.0.1:4067/config
+Will show you the current config state
+
+6) http://127.0.0.1:4067/config?hashrate_avr=10&temperature-limit=70&temperature-start=40
+Will set following parameters on the fly:
+hashrate_avr=10
+temperature-limit=70
+temperature-start=40
+
+POST usage examples:
+For POST requests you must use correct json object with parameters you want to change.
+http://127.0.0.1:4067/config
+POST payload:
+{
+"hashrate_avr": 10,
+"temperature-limit": 70,
+"temperature-start": 40
+}
+Parameters names and types in json are identical to config json you use.
+
 
 ==[ SUMMARY ]==
 

@@ -15,13 +15,16 @@ DRV_VERS=`nvidia-smi --help | head -n 1 | awk '{print $NF}' | sed 's/v//' | tr '
 #echo $DRV_VERS
 
 echo -e -n "${GREEN}NVidia${NOCOLOR} driver ${GREEN}${DRV_VERS}${NOCOLOR}-series detected "
-if [ ${DRV_VERS} -ge 396 ]; then
-   echo -e "(${BCYAN}CUDA 9.2${NOCOLOR} compatible)"
-   ln -fs t-rex-cuda92 t-rex
+if [ ${DRV_VERS} -ge 410 ]; then
+    echo -e "(${BCYAN}CUDA 10${NOCOLOR} compatible)"
+    binary=t-rex-c100
+elif [ ${DRV_VERS} -ge 396 ]; then
+    echo -e "(${BCYAN}CUDA 9.2${NOCOLOR} compatible)"
+    binary=t-rex-c92
 else
-   echo -e "(${BCYAN}CUDA 9.1${NOCOLOR} compatible)"
-   ln -fs t-rex-cuda91 t-rex
+    echo -e "(${BCYAN}CUDA 9.1${NOCOLOR} compatible)"
+    binary=t-rex-c91
 fi
 
-./t-rex -c ${CUSTOM_CONFIG_FILENAME}
+./${binary} -c ${CUSTOM_CONFIG_FILENAME}
 #./t-rex -c config.json

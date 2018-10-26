@@ -5,7 +5,12 @@
 [[ -z $CUSTOM_URL ]] && echo -e "${YELLOW}CUSTOM_URL is empty${NOCOLOR}" && return 2
 [[ -z $CUSTOM_PASS ]] && CUSTOM_PASS=x
 
-conf="--url ${CUSTOM_URL} --user ${CUSTOM_TEMPLATE} --pass ${CUSTOM_PASS} --api-port ${CUSTOM_API_PORT} --print-full --print-time=60 --print-level=2 --donate-level=1"
+pools=""
+for pool_url in $CUSTOM_URL; do
+	pools+="--url $pool_url "
+done
+
+conf="$pools --user ${CUSTOM_TEMPLATE} --pass ${CUSTOM_PASS} --api-port ${CUSTOM_API_PORT} --print-full --print-time=60 --print-level=2 --donate-level=1"
 if [ ! -z $CUSTOM_ALGO ]; then 
 	case $CUSTOM_ALGO in
 		skunk) wild_algo=skunkhash
