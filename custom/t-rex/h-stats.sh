@@ -16,7 +16,7 @@ if [[ $? -ne 0 ]]; then
 	khs=0
 else
 	local gpu_worked=`echo summary | nc localhost 4058 | jq '.gpus[].gpu_id'`
-	local gpu_busid=`cat /var/run/hive/gpu-detect.json | jq -r '.[].busid' | cut -d ':' -f 1`
+	local gpu_busid=`cat /var/run/hive/gpu-detect.json | jq -r '.[] | select(.brand=="nvidia") | .busid' | cut -d ':' -f 1`
 	local busids=''
 	local idx=0
 	for i in $gpu_worked; do
