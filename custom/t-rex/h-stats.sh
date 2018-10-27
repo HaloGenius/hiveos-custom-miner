@@ -6,7 +6,7 @@ cd `dirname $0`
 #. /hive-config/wallet.conf
 . /hive/custom/$CUSTOM_MINER/h-manifest.conf
 
-#algo_avail=("balloon" "bcd" "bitcore" "c11" "hmq1725" "hsr" "lyra2z" "phi" "polytimos" "renesis" "sha256t" "skunk" "sonoa" "timetravel" "tribus" "x16r" "x16s" "x17")
+#algo_avail=("balloon" "bcd" "bitcore" "c11" "hmq1725" "hsr" "lyra2z" "phi" "polytimos" "renesis" "sha256t" "skunk" "sonoa" "timetravel" "tribus" "x16r" "x16s" "x17" "x22i")
 
 stat_raw=`echo 'summary' | nc -w $API_TIMEOUT localhost $API_PORT`
 #echo $stat_raw
