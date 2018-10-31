@@ -16,20 +16,18 @@ if [[ $? -ne 0 ]]; then
 	khs=0
 else
 	local gpu_worked=`echo summary | nc localhost 4058 | jq '.gpus[].gpu_id'`
-	local gpu_busid=`cat /var/run/hive/gpu-detect.json | jq -r '.[] | select(.brand=="nvidia") | .busid' | cut -d ':' -f 1`
+	local gpu_busid=(`cat /var/run/hive/gpu-detect.json | jq -r '.[] | select(.brand=="nvidia") | .busid' | cut -d ':' -f 1`)
 	local busids=''
 	local idx=0
 	for i in $gpu_worked; do
-		gpu=`cat /var/run/hive/gpu-detect.json | jq -r --arg idx "$i" '.[$idx|tonumber].busid' | cut -d ':' -f 1`
+#		gpu=`cat /var/run/hive/gpu-detect.json | jq -r --arg idx "$i" '.[$idx|tonumber].busid' | cut -d ':' -f 1`
+		gpu=${gpu_busid[$i]}
 		busids[idx]=$((16#$gpu))
 		idx=$((idx+1))
 	done
 	stats=$(jq --argjson gpus `echo ${busids[@]} | jq -cs '.'` '{hs: [.gpus[].hashrate], hs_units: "hs", temp: [.gpus[].temperature], fan: [.gpus[].fan_speed], uptime: .uptime, ar: [.accepted_count, .rejected_count], bus_numbers: $gpus, algo: .algorithm}' <<< $stat_raw)
 
 	# total hashrate in khs
-#	local total=$(echo $miner_stat | jq ".hashrate")
-#	[[ $total == "null" ]] && total=0
-#	khs=$((total/1000))
 	khs=$(jq ".hashrate/1000" <<< $stat_raw)
 fi
 
