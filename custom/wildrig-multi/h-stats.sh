@@ -6,6 +6,8 @@ stats_raw=`curl --connect-timeout 2 --max-time $API_TIMEOUT --silent --noproxy '
 
 if [[ $? -ne 0 || -z $stats_raw ]]; then
     echo -e "${YELLOW}Failed to read $miner from localhost:${CUSTOM_API_PORT}${NOCOLOR}"
+    khs=0
+    stats=''
 else
     local fan=$(jq -c "[.fan$amd_indexes_array]" <<< $gpu_stats)
     local temp=$(jq -c "[.temp$amd_indexes_array]" <<< $gpu_stats)
