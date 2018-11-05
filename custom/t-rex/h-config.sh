@@ -10,7 +10,13 @@
 [[ -z $CUSTOM_PASS ]] && CUSTOM_PASS="x"
 
 pools='[]'
-for url in $CUSTOM_URL; do
+local line=""
+local url=""
+for line in $CUSTOM_URL; do
+	local url=`head -n 1 <<< "$line"`
+	grep -q "://" <<< $url
+	[[ $? -ne 0 ]] && url="stratum+tcp://${url}"
+
 	pool=$(cat <<EOF
 			{"user": "$CUSTOM_TEMPLATE", "url": "$url", "pass": "$CUSTOM_PASS" }
 EOF
