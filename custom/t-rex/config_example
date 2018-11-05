@@ -78,5 +78,8 @@
   "temperature-limit": 0,
 
   // GPU temperature to enable card after it's been disabled. (default: 0 - disabled)
-  "temperature-start": 0
+  "temperature-start": 0,
+  
+  // Forces miner to switch back to main pool in case working with failover pool. Parameter is set in seconds. (default: 600)
+  "back-to-main-pool-sec": 600
 }

@@ -32,6 +32,7 @@ Options:
                                     x16r
                                     x16s
                                     x17
+                                    x22i
     -d, --devices                  Comma separated list of CUDA devices to use.
                                     Device IDs start counting from 0.
     -i, --intensity                GPU intensity 8-25 (default: auto).
@@ -59,6 +60,8 @@ Options:
     -l, --log-path                 Full path of the log file.
         --cpu-priority             Set process priority (default: 2) 0 idle, 2 normal to 5 highest.
 
+        --back-to-main-pool-sec    Forces miner to switch back to main pool in case working with failover pool.
+                                   Parameter is set in seconds. (default: 600)
         --exit-on-cuda-error       Forces miner to immediately exit on CUDA error.
         --exit-on-connection-lost  Forces miner to immediately exit on connection lost.
         --reconnect-on-fail-shares Forces miner to immediately reconnect to pool on N successively failed shares (default: 10).
@@ -248,3 +251,14 @@ http://127.0.0.1:4067/control?time-limit=0
 
 If you prefer POST set the request body to {"time-limit": 120}.
 
+==[ FILE ]==
+
+You can create a file in directory with the miner. This may be useful for external monitoring utilities or scripts which can take commands from this file and do some sort of useful stuff like overclock or system reconfiguration.
+
+http://127.0.0.1:4067/file?name=test.txt&data=some sort of text data
+
+If you prefer POST set the request body to 
+{
+"name": "test.txt",
+"data": "some sort of text data"
+}
