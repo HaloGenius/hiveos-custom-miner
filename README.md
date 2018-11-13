@@ -3,7 +3,7 @@
 Used manual at https://github.com/minershive/hiveos-linux/tree/master/hive/custom/
 
 ### Currently integrated as custom miners:
-* [WildRig-Multi v0.12.8.1](https://github.com/HaloGenius/hiveos-custom-miner/releases/tag/wildrig-multi-0.12.8.1)
+* [WildRig-Multi v0.12.9](https://github.com/HaloGenius/hiveos-custom-miner/releases/tag/wildrig-multi-0.12.9)
 * [lolMiner v0.5](https://github.com/HaloGenius/hiveos-custom-miner/releases/tag/lolMiner-0.5)
 * [T-Rex v0.7.4](https://github.com/HaloGenius/hiveos-custom-miner/releases/tag/t-rex-v0.7.4)
 * [TDXminer v0.2.2.2](https://github.com/HaloGenius/hiveos-custom-miner/releases/tag/tdxminer-v0.2.2.2)
