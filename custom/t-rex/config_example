@@ -3,13 +3,33 @@
   "pools": [
     {
       "user": "1MKrTujwHxda6knL8hHrPMi7Git4upX56E", // wallet address
-      "url": "stratum+tcp://mine.icemining.ca:8433", // pool stratum
-      "pass": "c=BCD" // password
+      "url": "stratum+tcp://pool.minermore.com:4501", // pool stratum (US)
+      "pass": "x" // password
     },
     {
-      "user": "1MKrTujwHxda6knL8hHrPMi7Git4upX56E",
-      "url": "stratum+tcp://eu.gos.cx:8844",
-      "pass": "c=BCD"
+      "user": "CHANGETHIS.worker",
+      "url": "stratum+tcp://ca.minermore.com:4501", // <-- Montreal Canada
+      "pass": "x"
+    },
+    {
+      "user": "CHANGETHIS.worker",
+      "url": "stratum+tcp://pool.minermore.com:5501", // <-- US
+      "pass": "x"
+    },
+    {
+      "user": "CHANGETHIS.worker",
+      "url": "stratum+tcp://eu.minermore.com:4501", // <-- Frankfurt, Germany
+      "pass": "x"
+    },
+    {
+      "user": "CHANGETHIS.worker",
+      "url": "stratum+tcp://eu.minermore.com:5501", // <-- Frankfurt, Germany
+      "pass": "x"
+    },
+    {
+      "user": "CHANGETHIS.worker",
+      "url": "stratum+tcp://hk.minermore.com:4501", // <-- Hong Kong
+      "pass": "x"
     }
   ],
 
@@ -32,7 +52,7 @@
   "timeout": 180,
 
   // Name of mining algorithm. You can see available names at the top of the help file.
-  "algo": "bcd",
+  "algo": "x16r",
   
   // This is GPU index in the system. You can select multiple GPUs sequentially: "devices": "0,2,3"
   "devices": 0, // Use only the first GPU in your rig. Remove this parameter to use all GPUs
@@ -50,6 +70,9 @@
   // Set process priority (default: 2) 1 below normal, 2 normal to 5 highest.
   "cpu-priority": 2,
 
+  // Perform auto update whenever a newer version of the miner is available.
+  "autoupdate": false,
+  
   // Shutdown miner immediately if has any CUDA error.
   "exit-on-cuda-error": true,
 

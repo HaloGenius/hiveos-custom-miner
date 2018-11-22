@@ -10,6 +10,9 @@ cd `dirname $0`
 [[ ! -f $CUSTOM_CONFIG_FILENAME ]] && echo -e "${RED}No $CUSTOM_CONFIG_FILENAME is found${NOCOLOR}" && return 2
 [[ ! -s $CUSTOM_CONFIG_FILENAME ]] && echo -e "${RED}Config file is empty - check syntax! ${NOCOLOR}" && return 3
 
+#Ubuntu 18.04 compat
+[[ -e /usr/lib/x86_64-linux-gnu/libcurl-compat.so.3.0.0 ]] && export LD_PRELOAD=libcurl-compat.so.3.0.0
+
 DRV_VERS=`nvidia-smi --help | head -n 1 | awk '{print $NF}' | sed 's/v//' | tr '.' ' ' | awk '{print $1}'`
 
 #echo $DRV_VERS
