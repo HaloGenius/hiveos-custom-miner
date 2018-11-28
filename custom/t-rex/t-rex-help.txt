@@ -18,6 +18,7 @@ Options:
                                     bcd
                                     bitcore
                                     c11
+                                    dedal
                                     geek
                                     hmq1725
                                     lyra2z
@@ -34,7 +35,7 @@ Options:
                                     x17
                                     x22i
     -d, --devices                  Comma separated list of CUDA devices to use.
-                                    Device IDs start counting from 0.
+                                   Device IDs start counting from 0.
     -i, --intensity                GPU intensity 8-25 (default: auto).
     -o, --url                      URL of mining server.
     -u, --user                     Username for mining server.
