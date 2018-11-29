@@ -61,7 +61,10 @@
   "intensity": 20,
   
   // Sliding window length in sec used to compute average hashrate.
-  "hashrate-avr": 30, // Set to 3600 to get average over an hour
+  "hashrate-avr": 60, // Set to 3600 to get average over an hour
+
+  // Sliding window length in sec used to compute sharerate.
+  "sharerate-avr": 600,
 
   // Path to the log file. If only file name set log will be saved into directory with the miner.
   "log-path": "t-rex.log",

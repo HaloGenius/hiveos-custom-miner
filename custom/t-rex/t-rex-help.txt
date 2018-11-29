@@ -33,6 +33,7 @@ Options:
                                     x16r
                                     x16s
                                     x17
+                                    x21s
                                     x22i
     -d, --devices                  Comma separated list of CUDA devices to use.
                                    Device IDs start counting from 0.
@@ -51,7 +52,8 @@ Options:
         --api-bind-http            IP:port for the miner API via HTTP (default: 0.0.0.0:4067). Set to 0 to disable.
     -J  --json-response            Telnet API server will make json responses.
 
-    -N, --hashrate-avr             Sliding window length in seconds used to compute average hashrate (default: 30).
+    -N, --hashrate-avr             Sliding window length in seconds used to compute average hashrate (default: 60).
+        --sharerate-avr            Sliding window length in seconds used to compute sharerate (default: 600).
         --gpu-report-interval      GPU stats report frequency. (default: 5. every 5th share)
     -q, --quiet                    Quiet mode. No GPU stats at all.
         --no-color                 Disable color output for console.
