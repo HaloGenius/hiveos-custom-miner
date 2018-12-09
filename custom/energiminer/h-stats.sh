@@ -13,7 +13,7 @@ local stats_raw=`cat ${LOG} | tail -n 100 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1
 #Calculate miner log freshness
 local maxDelay=120
 local time_now=`date +%T | awk -F: '{ print ($1 * 3600) + $2*60 + $3 }'`
-local time_rep=`echo $stats_raw | awk '{ print $2 }' | awk -F: '{ print ($1 * 3600) + $2*60 + $3 }'`
+local time_rep=`echo $stats_raw | sed 's/^.*\<Time\>: //' | awk -F: '{ print ($1 * 3600) + $2*60}'`
 local diffTime=`echo $((time_now-time_rep)) | tr -d '-'`
 
 if [ "$diffTime" -lt "$maxDelay" ]; then
